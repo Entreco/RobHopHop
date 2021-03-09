@@ -1,0 +1,17 @@
+com\bitvavo\api\Bitvavo.class
+com\bitvavo\api\WebsocketSendThread.class
+com\bitvavo\api\Bitvavo$Websocket$2.class
+com\bitvavo\api\Bitvavo$1.class
+com\bitvavo\api\WebsocketClientEndpoint$1.class
+com\bitvavo\api\WebsocketClientEndpoint.class
+com\bitvavo\api\WebsocketClientEndpoint$MessageHandler.class
+com\bitvavo\api\example\example$3.class
+com\bitvavo\api\Bitvavo$Websocket.class
+com\bitvavo\api\Bitvavo$2.class
+com\bitvavo\api\WebsocketClientEndpoint$2.class
+com\bitvavo\api\example\example$1.class
+com\bitvavo\api\example\example$2.class
+com\bitvavo\api\WebsocketClientEndpoint$BookHandler.class
+com\bitvavo\api\KeepAliveThread.class
+com\bitvavo\api\example\example.class
+com\bitvavo\api\Bitvavo$Websocket$1.class

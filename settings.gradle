@@ -1,0 +1,4 @@
+include ':libs:exchange-bitvavo'
+include ':libs:exchange-core'
+include ':app'
+rootProject.name = "Rob hop hop"
