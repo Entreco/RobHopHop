@@ -3,6 +3,7 @@
     package="nl.entreco.robhophop">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -20,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".setup.SetupActivity"
-            android:theme="@style/SetupTheme">
+        <activity
+            android:name=".pin.PinActivity"
+            android:theme="@style/NormalTheme"
+            android:exported="false">
             <intent-filter>
                 <action android:name="nl.entreco.robhophop.Setup" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -29,7 +32,8 @@
         </activity>
         <activity
             android:name=".main.MainActivity"
-            android:label="@string/app_name">
+            android:theme="@style/NormalTheme"
+            android:exported="false">
             <intent-filter>
                 <action android:name="nl.entreco.robhophop.Main" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -38,7 +42,7 @@
         <activity
             android:name=".monitor.MonitorActivity"
             android:exported="false"
-            android:label="@string/title_monitor">
+            android:theme="@style/NormalTheme">
             <intent-filter>
                 <action android:name="nl.entreco.robhophop.Monitor" />
                 <category android:name="android.intent.category.DEFAULT" />

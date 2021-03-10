@@ -1,4 +1,4 @@
-package nl.entreco.robhophop.setup
+package nl.entreco.robhophop.pin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import nl.entreco.robhophop.R
 import nl.entreco.robhophop.RobKtx.viewModelProvider
-import nl.entreco.robhophop.databinding.ActivitySetupBinding
-import nl.entreco.robhophop.setup.di.component
+import nl.entreco.robhophop.databinding.ActivityPinBinding
+import nl.entreco.robhophop.pin.di.component
 
 /*************************************************************************
  *
@@ -19,7 +19,7 @@ import nl.entreco.robhophop.setup.di.component
  *  All Rights Reserved.
  *
  */
-class SetupActivity : AppCompatActivity() {
+class PinActivity : AppCompatActivity() {
 
     private val component by component()
     private val viewModel by viewModelProvider { component.viewModel() }
@@ -27,13 +27,14 @@ class SetupActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivitySetupBinding>(this, R.layout.activity_setup)
+        val binding = DataBindingUtil.setContentView<ActivityPinBinding>(this, R.layout.activity_pin)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        lifecycleScope.launchWhenCreated {
-            viewModel.events().asLiveData(coroutineContext).observe(this@SetupActivity, navigator)
-        }
+        navigator.onChanged(PinEvent.Check)
 
+        lifecycleScope.launchWhenCreated {
+            viewModel.events().asLiveData(coroutineContext).observe(this@PinActivity, navigator)
+        }
     }
 }

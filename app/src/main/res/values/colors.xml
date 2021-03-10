@@ -8,10 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-<!--    <color name="logo1">#836a63</color>-->
-<!--    <color name="logo2">#b8babb</color>-->
-<!--    <color name="logo3">#3e3f48</color>-->
-
-    <color name="logo1">#00ffffff</color>
-    <color name="logo2">?attr/colorPrimary</color>
+    <color name="logo_tint">?attr/colorPrimary</color>
 </resources>

@@ -24,8 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean
 class BitvavoMonitoringService : ExchangeMonitoringService {
 
     private val bitvavo = Bitvavo.builder()
-        .withApiKey("see local.properties")
-        .withSecret("see local.properties")
+        .withApiKey(BuildConfig.API_KEY)
+        .withSecret(BuildConfig.API_SECRET)
         .withDebugging()
         .build()
 

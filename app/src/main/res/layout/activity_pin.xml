@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="nl.entreco.robhophop.setup.SetupViewModel" />
+            type="nl.entreco.robhophop.pin.PinViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,12 +18,13 @@
             style="@style/PinDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:errorAnimation="@{viewModel.showError}"
             app:layout_constraintBottom_toTopOf="@id/pin_1"
             app:layout_constraintEnd_toStartOf="@id/dot_2"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:errorAnimation="@{viewModel.showError}"
             app:pinSelected="@{viewModel.dot1}" />
 
         <ImageView
@@ -31,11 +32,12 @@
             style="@style/PinDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:errorAnimation="@{viewModel.showError}"
             app:layout_constraintBottom_toTopOf="@id/pin_1"
             app:layout_constraintEnd_toStartOf="@id/dot_3"
             app:layout_constraintStart_toEndOf="@id/dot_1"
             app:layout_constraintTop_toTopOf="parent"
-            app:errorAnimation="@{viewModel.showError}"
             app:pinSelected="@{viewModel.dot2}" />
 
         <ImageView
@@ -43,11 +45,12 @@
             style="@style/PinDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:errorAnimation="@{viewModel.showError}"
             app:layout_constraintBottom_toTopOf="@id/pin_1"
             app:layout_constraintEnd_toStartOf="@id/dot_4"
             app:layout_constraintStart_toEndOf="@id/dot_2"
             app:layout_constraintTop_toTopOf="parent"
-            app:errorAnimation="@{viewModel.showError}"
             app:pinSelected="@{viewModel.dot3}" />
 
         <ImageView
@@ -55,11 +58,12 @@
             style="@style/PinDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:errorAnimation="@{viewModel.showError}"
             app:layout_constraintBottom_toTopOf="@id/pin_1"
             app:layout_constraintEnd_toStartOf="@id/dot_5"
             app:layout_constraintStart_toEndOf="@id/dot_3"
             app:layout_constraintTop_toTopOf="parent"
-            app:errorAnimation="@{viewModel.showError}"
             app:pinSelected="@{viewModel.dot4}" />
 
         <ImageView
@@ -67,11 +71,12 @@
             style="@style/PinDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:errorAnimation="@{viewModel.showError}"
             app:layout_constraintBottom_toTopOf="@id/pin_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dot_4"
             app:layout_constraintTop_toTopOf="parent"
-            app:errorAnimation="@{viewModel.showError}"
             app:pinSelected="@{viewModel.dot5}" />
 
         <View
@@ -89,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(1)}"
-            android:text="1"
+            android:text="@string/number_1"
             app:layout_constraintBottom_toTopOf="@id/pin_4"
             app:layout_constraintEnd_toStartOf="@id/pin_2"
             app:layout_constraintStart_toStartOf="parent" />
@@ -100,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(2)}"
-            android:text="2"
+            android:text="@string/number_2"
             app:layout_constraintBottom_toTopOf="@id/pin_4"
             app:layout_constraintEnd_toStartOf="@id/pin_3"
             app:layout_constraintStart_toEndOf="@id/pin_1" />
@@ -111,7 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(3)}"
-            android:text="3"
+            android:text="@string/number_3"
             app:layout_constraintBottom_toTopOf="@id/pin_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pin_2" />
@@ -122,7 +127,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(4)}"
-            android:text="4"
+            android:text="@string/number_4"
             app:layout_constraintBottom_toTopOf="@id/pin_7"
             app:layout_constraintEnd_toStartOf="@id/pin_2"
             app:layout_constraintStart_toStartOf="parent" />
@@ -133,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(5)}"
-            android:text="5"
+            android:text="@string/number_5"
             app:layout_constraintBottom_toTopOf="@id/pin_7"
             app:layout_constraintEnd_toStartOf="@id/pin_3"
             app:layout_constraintStart_toEndOf="@id/pin_1" />
@@ -144,7 +149,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(6)}"
-            android:text="6"
+            android:text="@string/number_6"
             app:layout_constraintBottom_toTopOf="@id/pin_7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pin_2" />
@@ -155,7 +160,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(7)}"
-            android:text="7"
+            android:text="@string/number_7"
             app:layout_constraintBottom_toTopOf="@id/pin_none"
             app:layout_constraintEnd_toStartOf="@id/pin_2"
             app:layout_constraintStart_toStartOf="parent" />
@@ -166,7 +171,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(8)}"
-            android:text="8"
+            android:text="@string/number_8"
             app:layout_constraintBottom_toTopOf="@id/pin_none"
             app:layout_constraintEnd_toStartOf="@id/pin_3"
             app:layout_constraintStart_toEndOf="@id/pin_1" />
@@ -177,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(9)}"
-            android:text="9"
+            android:text="@string/number_9"
             app:layout_constraintBottom_toTopOf="@id/pin_none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pin_2" />
@@ -199,7 +204,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEntered(0)}"
-            android:text="0"
+            android:text="@string/number_0"
             app:layout_constraintBottom_toTopOf="@id/pin_forgot"
             app:layout_constraintEnd_toStartOf="@id/pin_3"
             app:layout_constraintStart_toEndOf="@id/pin_1" />
@@ -222,7 +227,7 @@
             style="@style/PinButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="PIN vergeten"
+            android:text="@string/forgot_pin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/pin_fingerprint"
             app:layout_constraintStart_toStartOf="parent" />
@@ -232,7 +237,8 @@
             style="@style/PinButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Vingerafdruk"
+            android:onClick="@{()->viewModel.onFingerPrint()}"
+            android:text="@string/fingerprint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pin_forgot" />

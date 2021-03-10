@@ -11,12 +11,8 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.cio.websocket.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -143,48 +139,49 @@ class Bitvavo internal constructor(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    suspend fun subscriptionTicker(market: String): Flow<SubscriptionTicker> = flow<SubscriptionTicker> {
-        val options = SubscriptionTickerOptions(
-            listOf(Channel(listOf(market), "ticker")),
-            "subscribe"
-        )
+    suspend fun subscriptionTicker(market: String): Flow<SubscriptionTicker> =
+        flow<SubscriptionTicker> {
+            val options = SubscriptionTickerOptions(
+                listOf(Channel(listOf(market), "ticker")),
+                "subscribe"
+            )
 
-        val stringOptions = Json { ignoreUnknownKeys = true }.encodeToString(
-            SubscriptionTickerOptions.serializer(),
-            options
-        )
-        Log.d("WOAH", "Options: $options")
-        Log.d("WOAH", "Options: $stringOptions")
+            val stringOptions = Json { ignoreUnknownKeys = true }.encodeToString(
+                SubscriptionTickerOptions.serializer(),
+                options
+            )
+            Log.d("WOAH", "Options: $options")
+            Log.d("WOAH", "Options: $stringOptions")
 
-        val shouldbe =
-            "{\"channels\":[{\"markets\":[\"BTC-EUR\"],\"name\":\"ticker\"}],\"action\":\"subscribe\"}"
-        Log.d("WOAH", "Options: $shouldbe")
+            val shouldbe =
+                "{\"channels\":[{\"markets\":[\"BTC-EUR\"],\"name\":\"ticker\"}],\"action\":\"subscribe\"}"
+            Log.d("WOAH", "Options: $shouldbe")
 
-        activatedSubscriptionTicker.set(true)
+            activatedSubscriptionTicker.set(true)
 
-        client.wss(wsUrl) {
-            send(shouldbe)
-            val confirmation = incoming.receive()
-            Log.d("WOAH", "Subscription: ${(confirmation as? Frame.Text)?.readText()}")
+            client.wss(wsUrl) {
+                send(shouldbe)
+                val confirmation = incoming.receive()
+                Log.d("WOAH", "Subscription: ${(confirmation as? Frame.Text)?.readText()}")
 
-            while(true) {
-                val frame = incoming.receive()
-                when (frame) {
-                    is Frame.Text -> {
-                        try {
-                            val subscription: SubscriptionTicker =
-                                Json.decodeFromString<SubscriptionTicker>(frame.readText())
-                            Log.d("WOAH", "Subscription: ${frame.readText()}")
-                            emit(subscription)
-                        } catch (oops: Exception) {
-                            Log.d("WOAH", "Error: ${frame.readText()}")
-                            Log.d("WOAH", "Error: $oops")
+                while (true) {
+                    val frame = incoming.receive()
+                    when (frame) {
+                        is Frame.Text -> {
+                            try {
+                                val subscription: SubscriptionTicker =
+                                    Json.decodeFromString<SubscriptionTicker>(frame.readText())
+                                Log.d("WOAH", "Subscription: ${frame.readText()}")
+                                emit(subscription)
+                            } catch (oops: Exception) {
+                                Log.d("WOAH", "Error: ${frame.readText()}")
+                                Log.d("WOAH", "Error: $oops")
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
     companion object {
         fun builder() = Builder()

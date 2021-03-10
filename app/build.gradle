@@ -43,17 +43,23 @@ dependencies {
     implementation project(":libs:exchange-bitvavo")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     implementation "androidx.core:core-ktx:$xCoreKtx"
     implementation "androidx.appcompat:appcompat:$xAppcompat"
-    implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$xConstraint"
-    implementation "androidx.navigation:navigation-fragment:$xNavigation"
-    implementation "androidx.navigation:navigation-ui:$xNavigation"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$xLifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$xLifecycle"
     implementation "androidx.lifecycle:lifecycle-extensions:$xLifecycleKtx"
+    implementation "androidx.navigation:navigation-fragment:$xNavigation"
+    implementation "androidx.navigation:navigation-ui:$xNavigation"
     implementation "androidx.navigation:navigation-fragment-ktx:$xNavigation"
     implementation "androidx.navigation:navigation-ui-ktx:$xNavigation"
+
+    implementation "com.google.android.material:material:$material"
+
+    implementation "androidx.biometric:biometric:1.1.0"
+    implementation "androidx.biometric:biometric-ktx:1.2.0-alpha03"
+
     implementation "com.google.dagger:dagger:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"
 

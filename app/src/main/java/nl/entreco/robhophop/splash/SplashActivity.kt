@@ -17,7 +17,8 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Launch Home
+        // Launch Setup
         startActivity(Intent("nl.entreco.robhophop.Setup"))
+        finish()
     }
 }

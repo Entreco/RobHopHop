@@ -1,4 +1,4 @@
-package nl.entreco.robhophop.setup
+package nl.entreco.robhophop.pin
 
 /*************************************************************************
  *
@@ -9,9 +9,11 @@ package nl.entreco.robhophop.setup
  *  All Rights Reserved.
  *
  */
-class SetupModel {
+class PinModel {
 }
 
-sealed class SetupEvent{
-    object Go : SetupEvent()
+sealed class PinEvent{
+    object Go : PinEvent()
+    object Check : PinEvent()
+    object Fingerprint : PinEvent()
 }

@@ -26,6 +26,7 @@ internal class ExchangeImpl(
 
 
 class ExchangeBuilder(internal val name: String) {
+
     private var key: String? = null
     private var secret: String? = null
 

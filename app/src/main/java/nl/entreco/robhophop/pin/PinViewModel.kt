@@ -1,4 +1,4 @@
-package nl.entreco.robhophop.setup
+package nl.entreco.robhophop.pin
 
 import android.view.View
 import android.view.animation.BounceInterpolator
@@ -23,7 +23,7 @@ import javax.inject.Inject
  *  All Rights Reserved.
  *
  */
-class SetupViewModel @Inject constructor() : ViewModel() {
+class PinViewModel @Inject constructor() : ViewModel() {
 
     val dot1 = ObservableBoolean(false)
     val dot2 = ObservableBoolean(false)
@@ -34,8 +34,8 @@ class SetupViewModel @Inject constructor() : ViewModel() {
 
     private val dots = listOf(dot1, dot2, dot3, dot4, dot5)
 
-    private val events = MutableSharedFlow<SetupEvent>()
-    fun events(): SharedFlow<SetupEvent> = events
+    private val events = MutableSharedFlow<PinEvent>()
+    fun events(): SharedFlow<PinEvent> = events
 
     private val enteredPinCode = ObservableField("").apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
@@ -64,10 +64,16 @@ class SetupViewModel @Inject constructor() : ViewModel() {
         enteredPinCode.set(enteredPinCode.get()?.dropLast(1))
     }
 
+    fun onFingerPrint() {
+        viewModelScope.launch {
+            events.emit(PinEvent.Fingerprint)
+        }
+    }
+
     private fun tryLogin() {
         viewModelScope.launch {
-            if ("06720" == enteredPinCode.get()) {
-                events.emit(SetupEvent.Go)
+            if ("12345" == enteredPinCode.get()) {
+                events.emit(PinEvent.Go)
             } else {
                 showError.set(true)
                 delay(100)
