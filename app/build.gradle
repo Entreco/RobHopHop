@@ -35,11 +35,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/*'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
 
     implementation project(":libs:exchange-core")
+    implementation project(":libs:exchange-binance")
     implementation project(":libs:exchange-bitvavo")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

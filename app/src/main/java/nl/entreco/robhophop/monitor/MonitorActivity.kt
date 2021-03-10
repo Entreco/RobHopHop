@@ -1,13 +1,14 @@
 package nl.entreco.robhophop.monitor
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import nl.entreco.robhophop.R
+import nl.entreco.robhophop.RobKtx.hideSystemUi
 import nl.entreco.robhophop.RobKtx.viewModelProvider
+import nl.entreco.robhophop.databinding.ActivityMonitorBinding
 import nl.entreco.robhophop.monitor.di.component
 
 /*************************************************************************
@@ -25,19 +26,16 @@ class MonitorActivity : AppCompatActivity() {
     private val viewModel by viewModelProvider { component.viewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        hideSystemUi()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_monitor)
-        val btc = setupBtc()
+        val binding = DataBindingUtil.setContentView<ActivityMonitorBinding>(this, R.layout.activity_monitor)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenResumed {
             viewModel.state().collect {
-                btc.text = "${it.valueDescription} EUR"
+                binding.monitorBtc.text = getString(R.string.current_price, it.valueDescription)
             }
         }
-    }
-
-    private fun setupBtc(): TextView {
-        val btc = findViewById<TextView>(R.id.monitor_btc)
-        return btc
     }
 }

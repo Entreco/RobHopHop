@@ -39,7 +39,6 @@ class BitvavoMonitoringService : ExchangeMonitoringService {
         return BigDecimal(currentPrice().price)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun monitor(): Flow<BigDecimal> {
         return bitvavo.subscriptionTicker("BTC-EUR")
             .filter { it.lastPrice.isNotEmpty() }

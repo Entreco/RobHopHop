@@ -3,6 +3,7 @@ package nl.entreco.robhophop.main.home
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
+import nl.entreco.exchange_core.Exchange
 import javax.inject.Inject
 
 /*************************************************************************
@@ -20,7 +21,14 @@ class HomeNavigator @Inject constructor(
 
     override fun onChanged(event: HomeEvent?) {
         when (event) {
-            is HomeEvent.StartMonitoring -> context.startActivity(Intent("nl.entreco.robhophop.Monitor"))
+            is HomeEvent.StartMonitoring -> launchMonitor(event.exchange)
         }
+    }
+
+    private fun launchMonitor(exchange: Exchange) {
+        val intent = Intent("nl.entreco.robhophop.Monitor").apply {
+            putExtra("extra_exchange", exchange.name)
+        }
+        context.startActivity(intent)
     }
 }

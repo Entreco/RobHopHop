@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import nl.entreco.robhophop.R
+import nl.entreco.robhophop.RobKtx.hideSystemUi
 import nl.entreco.robhophop.RobKtx.viewModelProvider
 import nl.entreco.robhophop.databinding.ActivityPinBinding
 import nl.entreco.robhophop.pin.di.component
@@ -26,6 +27,7 @@ class PinActivity : AppCompatActivity() {
     private val navigator by lazy { component.navigator() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        hideSystemUi()
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityPinBinding>(this, R.layout.activity_pin)
         binding.viewModel = viewModel

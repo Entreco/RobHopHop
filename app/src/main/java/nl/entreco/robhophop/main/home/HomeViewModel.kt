@@ -13,10 +13,10 @@ import nl.entreco.exchange_core.Exchange
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    exchanges: Set<@JvmSuppressWildcards Exchange>
+    exchanges: Map<String, @JvmSuppressWildcards Exchange>
 ) : ViewModel(), AdapterView.OnItemSelectedListener {
 
-    private val state = MutableStateFlow(HomeModel(exchanges = exchanges))
+    private val state = MutableStateFlow(HomeModel(exchanges = exchanges.values.toSet()))
     fun state(): StateFlow<HomeModel> = state
 
     private val events = MutableSharedFlow<HomeEvent>()
@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         viewModelScope.launch {
             try {
-                state.value.select(position)
+                state.value = state.value.select(position)
                 events.emit(HomeEvent.ExchangeSelected(state.value.selected))
             } catch (iob: IndexOutOfBoundsException) {
                 state.value = state.value.none()
@@ -43,7 +43,8 @@ class HomeViewModel @Inject constructor(
 
     fun onStartClicked() {
         viewModelScope.launch {
-            events.emit(HomeEvent.StartMonitoring(state.value.selected))
+            val exchange = state.value.selected
+            events.emit(HomeEvent.StartMonitoring(exchange))
         }
     }
 }

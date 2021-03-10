@@ -3,6 +3,7 @@ package nl.entreco.robhophop.main.home.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import nl.entreco.exchange_binance.BinanceModule
 import nl.entreco.exchange_bitvavo.BitvavoModule
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.robhophop.main.home.HomeFragment
@@ -19,10 +20,12 @@ import nl.entreco.robhophop.main.home.exchanges.HomeExchangeItemAdapter
  *  All Rights Reserved.
  *
  */
-@Component(modules = [HomeModule::class, BitvavoModule::class])
+@Component(modules = [
+    HomeModule::class,
+    BinanceModule::class,
+    BitvavoModule::class,
+])
 interface HomeComponent {
-
-    fun exchange(): Set<@JvmSuppressWildcards Exchange>
 
     fun viewModel(): HomeViewModel
     fun navigator(): HomeNavigator

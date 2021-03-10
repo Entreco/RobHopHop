@@ -1,11 +1,13 @@
 package nl.entreco.robhophop.monitor
 
 import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
 import java.math.BigDecimal
 import javax.inject.Inject
@@ -20,11 +22,13 @@ import javax.inject.Inject
  *
  */
 class MonitorViewModel @Inject constructor(
-    private val monitoringService: ExchangeMonitoringService
+    private val exchange: Exchange,
+    private val service: ExchangeMonitoringService,
 ) : ViewModel() {
 
-    private val state = MutableStateFlow(MonitorModel(valueDescription = "--", BigDecimal.ZERO))
+    val title = ObservableField(exchange.name)
 
+    private val state = MutableStateFlow(MonitorModel(valueDescription = "--", BigDecimal.ZERO))
     fun state(): StateFlow<MonitorModel> = state
 
     private val events = MutableSharedFlow<MonitorEvent>()
@@ -32,18 +36,18 @@ class MonitorViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val currentValue = monitoringService.start()
+            val currentValue = service.start()
             state.value = state.value.init(currentValue)
 
-            monitoringService.monitor().onEach {
-                Log.d("WOAH", "collecting: $it")
+            service.monitor().onEach {
+                Log.d("WOAH", "Collecting: $it EUR")
                 state.value = state.value.update(it)
             }.collect()
         }
     }
 
     override fun onCleared() {
-        monitoringService.stop()
+        service.stop()
         super.onCleared()
     }
 

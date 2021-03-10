@@ -1,5 +1,7 @@
 package nl.entreco.robhophop
 
+import android.app.Activity
+import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -25,6 +27,7 @@ object RobKtx {
             }
         }).get(VM::class.java)
     }
+
     inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
         crossinline provider: () -> VM
     ): Lazy<VM> = lazy {
@@ -33,5 +36,11 @@ object RobKtx {
                 return provider() as T
             }
         }).get(VM::class.java)
+    }
+
+    fun Activity.hideSystemUi() {
+        window.decorView.systemUiVisibility =
+            SYSTEM_UI_FLAG_LAYOUT_STABLE or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
     }
 }
