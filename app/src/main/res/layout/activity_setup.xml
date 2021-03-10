@@ -1,33 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+    <data>
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+        <variable
+            name="viewModel"
+            type="nl.entreco.robhophop.setup.SetupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/mobile_navigation" />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/dot_1"
+            style="@style/PinDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toStartOf="@id/dot_2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorAnimation="@{viewModel.showError}"
+            app:pinSelected="@{viewModel.dot1}" />
+
+        <ImageView
+            android:id="@+id/dot_2"
+            style="@style/PinDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toStartOf="@id/dot_3"
+            app:layout_constraintStart_toEndOf="@id/dot_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorAnimation="@{viewModel.showError}"
+            app:pinSelected="@{viewModel.dot2}" />
+
+        <ImageView
+            android:id="@+id/dot_3"
+            style="@style/PinDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toStartOf="@id/dot_4"
+            app:layout_constraintStart_toEndOf="@id/dot_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorAnimation="@{viewModel.showError}"
+            app:pinSelected="@{viewModel.dot3}" />
+
+        <ImageView
+            android:id="@+id/dot_4"
+            style="@style/PinDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toStartOf="@id/dot_5"
+            app:layout_constraintStart_toEndOf="@id/dot_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorAnimation="@{viewModel.showError}"
+            app:pinSelected="@{viewModel.dot4}" />
+
+        <ImageView
+            android:id="@+id/dot_5"
+            style="@style/PinDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot_4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorAnimation="@{viewModel.showError}"
+            app:pinSelected="@{viewModel.dot5}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.2"
+            android:background="?attr/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/pin_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_1"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(1)}"
+            android:text="1"
+            app:layout_constraintBottom_toTopOf="@id/pin_4"
+            app:layout_constraintEnd_toStartOf="@id/pin_2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_2"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(2)}"
+            android:text="2"
+            app:layout_constraintBottom_toTopOf="@id/pin_4"
+            app:layout_constraintEnd_toStartOf="@id/pin_3"
+            app:layout_constraintStart_toEndOf="@id/pin_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_3"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(3)}"
+            android:text="3"
+            app:layout_constraintBottom_toTopOf="@id/pin_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pin_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_4"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(4)}"
+            android:text="4"
+            app:layout_constraintBottom_toTopOf="@id/pin_7"
+            app:layout_constraintEnd_toStartOf="@id/pin_2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_5"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(5)}"
+            android:text="5"
+            app:layout_constraintBottom_toTopOf="@id/pin_7"
+            app:layout_constraintEnd_toStartOf="@id/pin_3"
+            app:layout_constraintStart_toEndOf="@id/pin_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_6"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(6)}"
+            android:text="6"
+            app:layout_constraintBottom_toTopOf="@id/pin_7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pin_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_7"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(7)}"
+            android:text="7"
+            app:layout_constraintBottom_toTopOf="@id/pin_none"
+            app:layout_constraintEnd_toStartOf="@id/pin_2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_8"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(8)}"
+            android:text="8"
+            app:layout_constraintBottom_toTopOf="@id/pin_none"
+            app:layout_constraintEnd_toStartOf="@id/pin_3"
+            app:layout_constraintStart_toEndOf="@id/pin_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_9"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(9)}"
+            android:text="9"
+            app:layout_constraintBottom_toTopOf="@id/pin_none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pin_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_none"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="@id/pin_0"
+            app:layout_constraintEnd_toStartOf="@id/pin_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pin_0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_0"
+            style="@style/PinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.onEntered(0)}"
+            android:text="0"
+            app:layout_constraintBottom_toTopOf="@id/pin_forgot"
+            app:layout_constraintEnd_toStartOf="@id/pin_3"
+            app:layout_constraintStart_toEndOf="@id/pin_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_backspace"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{()->viewModel.onBackspace()}"
+            app:icon="@drawable/ic_backspace"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/pin_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pin_2"
+            app:layout_constraintTop_toTopOf="@id/pin_0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_forgot"
+            style="@style/PinButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="PIN vergeten"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/pin_fingerprint"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_fingerprint"
+            style="@style/PinButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Vingerafdruk"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pin_forgot" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

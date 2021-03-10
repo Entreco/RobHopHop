@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PinNumber" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:padding">@dimen/normal</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="PinButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/normal</item>
+    </style>
+
+    <style name="PinDot">
+        <item name="android:src">@drawable/dot</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+</resources>

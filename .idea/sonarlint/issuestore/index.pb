@@ -59,3 +59,5 @@ n
 \libs/exchange-bitvavo/libs/java-bitvavo-api-1.2.0/src/main/java/com/bitvavo/api/Bitvavo.java,5\d\5d881cfb0d31041028d643204966b7273f68dc43
 ~
 Nlibs/exchange-bitvavo/src/main/java/nl/entreco/exchange_bitvavo/api/Bitvavo.kt,e\4\e4867c4b44b7a3d0de8af58b3cd3e7f80283cc03
+@
+local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
