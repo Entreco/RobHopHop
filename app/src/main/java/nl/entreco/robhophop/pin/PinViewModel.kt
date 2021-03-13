@@ -14,15 +14,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class PinViewModel @Inject constructor() : ViewModel() {
 
     val dot1 = ObservableBoolean(false)

@@ -4,27 +4,27 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import nl.entreco.exchange_binance.BinanceModule
+import nl.entreco.exchange_bitmax.BitmaxModule
 import nl.entreco.exchange_bitvavo.BitvavoModule
-import nl.entreco.exchange_core.Exchange
+import nl.entreco.exchange_huobi.HuobiModule
+import nl.entreco.exchange_kraken.KrakenModule
+import nl.entreco.exchange_unicornx.UnicornxModule
 import nl.entreco.robhophop.main.home.HomeFragment
 import nl.entreco.robhophop.main.home.HomeNavigator
 import nl.entreco.robhophop.main.home.HomeViewModel
 import nl.entreco.robhophop.main.home.exchanges.HomeExchangeItemAdapter
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
-@Component(modules = [
-    HomeModule::class,
-    BinanceModule::class,
-    BitvavoModule::class,
-])
+@Component(
+    modules = [
+        HomeModule::class,
+        BinanceModule::class,
+        BitmaxModule::class,
+        BitvavoModule::class,
+        HuobiModule::class,
+        KrakenModule::class,
+        UnicornxModule::class,
+    ]
+)
 interface HomeComponent {
 
     fun viewModel(): HomeViewModel

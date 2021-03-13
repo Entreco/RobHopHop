@@ -11,15 +11,6 @@ import nl.entreco.robhophop.RobKtx.viewModelProvider
 import nl.entreco.robhophop.databinding.ActivityPinBinding
 import nl.entreco.robhophop.pin.di.component
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class PinActivity : AppCompatActivity() {
 
     private val component by component()

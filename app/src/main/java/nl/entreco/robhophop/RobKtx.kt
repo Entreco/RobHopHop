@@ -7,15 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 object RobKtx {
 
     inline fun <reified VM : ViewModel> AppCompatActivity.viewModelProvider(

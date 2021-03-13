@@ -30,7 +30,7 @@
             android:id="@+id/monitor_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BTC-EUR"
+            android:text="@{viewModel.market}"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/monitor_btc"

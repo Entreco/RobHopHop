@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="chart"
+            type="nl.entreco.charts.Chart" />
+    </data>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:showIn="@layout/fragment_dashboard">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:collapsedTitleGravity="center"
+            app:expandedTitleGravity="center">
+
+            <nl.entreco.charts.ChartView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:render="@{chart}"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier=".6" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:subtitle="Monitoring exchanges"
+            app:title="BTC-USDT" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

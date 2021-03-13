@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="nl.entreco.robhophop.main.dashboard.DashboardExchange" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small">
+
+        <TextView
+            android:id="@+id/exchange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{item.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Binance" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|end"
+            android:paddingEnd="@dimen/small"
+            android:paddingStart="@dimen/small"
+            android:text="@{item.price.toString()}"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@id/currency"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exchange"
+            tools:text="60000" />
+
+        <TextView
+            android:id="@+id/currency"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="start"
+            android:paddingStart="@dimen/small"
+            android:paddingEnd="@dimen/small"
+            android:text="@{item.currency}"
+            tools:text="EUR"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/price"
+            app:layout_constraintTop_toBottomOf="@id/exchange"
+            app:layout_constraintWidth_percent=".38" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

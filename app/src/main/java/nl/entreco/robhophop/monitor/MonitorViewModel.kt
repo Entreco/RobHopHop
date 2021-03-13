@@ -12,23 +12,15 @@ import nl.entreco.exchange_core.ExchangeMonitoringService
 import java.math.BigDecimal
 import javax.inject.Inject
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class MonitorViewModel @Inject constructor(
-    private val exchange: Exchange,
+    exchange: Exchange,
     private val service: ExchangeMonitoringService,
 ) : ViewModel() {
 
     val title = ObservableField(exchange.name)
+    val market = ObservableField(exchange.market)
 
-    private val state = MutableStateFlow(MonitorModel(valueDescription = "--", BigDecimal.ZERO))
+    private val state = MutableStateFlow(MonitorModel(valueDescription = "--", BigDecimal.ZERO, exchange.currency))
     fun state(): StateFlow<MonitorModel> = state
 
     private val events = MutableSharedFlow<MonitorEvent>()
@@ -40,8 +32,7 @@ class MonitorViewModel @Inject constructor(
             state.value = state.value.init(currentValue)
 
             service.monitor().onEach {
-                Log.d("WOAH", "Collecting: $it EUR")
-                state.value = state.value.update(it)
+                state.value = state.value.update(it.second)
             }.collect()
         }
     }

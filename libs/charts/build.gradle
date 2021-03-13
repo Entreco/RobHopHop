@@ -1,0 +1,20 @@
+apply from: "$rootDir/gradle/library.gradle"
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$xCoreKtx"
+    implementation "androidx.appcompat:appcompat:$xAppcompat"
+
+    implementation "com.google.android.material:material:$material"
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

@@ -13,15 +13,6 @@ import androidx.lifecycle.Observer
 import nl.entreco.robhophop.R
 import javax.inject.Inject
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class PinNavigator @Inject constructor(
     private val context: FragmentActivity,
     private val promptBuilder: BiometricPrompt.PromptInfo.Builder,

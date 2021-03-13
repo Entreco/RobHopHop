@@ -23,15 +23,6 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class Bitvavo internal constructor(
     builder: Builder
 ) {
@@ -150,13 +141,8 @@ class Bitvavo internal constructor(
                 SubscriptionTickerOptions.serializer(),
                 options
             )
-            Log.d("WOAH", "Options: $options")
-            Log.d("WOAH", "Options: $stringOptions")
 
-            val shouldbe =
-                "{\"channels\":[{\"markets\":[\"BTC-EUR\"],\"name\":\"ticker\"}],\"action\":\"subscribe\"}"
-            Log.d("WOAH", "Options: $shouldbe")
-
+            val shouldbe = "{\"channels\":[{\"markets\":[\"BTC-EUR\"],\"name\":\"ticker\"}],\"action\":\"subscribe\"}"
             activatedSubscriptionTicker.set(true)
 
             client.wss(wsUrl) {

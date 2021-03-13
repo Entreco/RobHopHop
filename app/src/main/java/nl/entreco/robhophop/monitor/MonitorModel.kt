@@ -1,20 +1,13 @@
 package nl.entreco.robhophop.monitor
 
 import java.math.BigDecimal
+import java.util.*
 import kotlin.random.Random
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 data class MonitorModel(
     val valueDescription: String,
-    val currentValue: BigDecimal
+    val currentValue: BigDecimal,
+    val currency: String
 ) {
     fun random(): MonitorModel {
         val delta: Int = Random.nextInt(-1, 1)

@@ -4,25 +4,26 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import nl.entreco.exchange_binance.BinanceModule
+import nl.entreco.exchange_bitmax.BitmaxModule
 import nl.entreco.exchange_bitvavo.BitvavoModule
 import nl.entreco.exchange_core.CurrentExchange
+import nl.entreco.exchange_huobi.HuobiModule
+import nl.entreco.exchange_kraken.KrakenModule
+import nl.entreco.exchange_unicornx.UnicornxModule
 import nl.entreco.robhophop.monitor.MonitorActivity
 import nl.entreco.robhophop.monitor.MonitorViewModel
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
-@Component(modules = [
-    MonitorModule::class,
-    BinanceModule::class,
-    BitvavoModule::class,
-])
+@Component(
+    modules = [
+        MonitorModule::class,
+        BinanceModule::class,
+        BitmaxModule::class,
+        BitvavoModule::class,
+        HuobiModule::class,
+        KrakenModule::class,
+        UnicornxModule::class,
+    ]
+)
 interface MonitorComponent {
 
     fun viewModel(): MonitorViewModel

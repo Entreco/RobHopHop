@@ -33,5 +33,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
     testImplementation "junit:junit:$junit"
 }

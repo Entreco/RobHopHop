@@ -6,15 +6,6 @@ import androidx.lifecycle.Observer
 import nl.entreco.exchange_core.Exchange
 import javax.inject.Inject
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class HomeNavigator @Inject constructor(
     private val context: Context
 ) : Observer<HomeEvent> {

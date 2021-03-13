@@ -4,15 +4,7 @@ import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.NoExchange
 import nl.entreco.robhophop.main.home.exchanges.HomeExchangeItem
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
+
 sealed class HomeEvent {
     object ExchangeDeselected : HomeEvent()
     data class ExchangeSelected(val exchange: Exchange) : HomeEvent()

@@ -77,3 +77,9 @@ Plibs/exchange-binance/src/main/java/nl/entreco/exchange_binance/BinanceModule.k
 [libs/exchange-binance/src/main/java/nl/entreco/exchange_binance/BinanceMonitoringService.kt,4\3\4384a43defba3ac01b428b93e7a577478249c5f0
 t
 Dapp/src/main/java/nl/entreco/robhophop/main/home/di/HomeComponent.kt,6\3\63faae58ae183c4c6f6b9cd19d05660c3fe33991
+|
+Llibs/exchange-core/src/main/java/nl/entreco/exchange_core/CurrentExchange.kt,e\5\e5a6a6dc581cda4b08710916d52adadd039c08d2
+m
+=app/src/main/java/nl/entreco/robhophop/main/home/HomeModel.kt,9\2\929a97835264f2ce42b168efba390d952cd5ca0c
+q
+Aapp/src/main/java/nl/entreco/robhophop/main/home/HomeNavigator.kt,6\d\6d255faa374d111f80b35443ef213a3c71188541

@@ -45,9 +45,16 @@ android {
 
 dependencies {
 
+    implementation project(":libs:charts")
+
+    // Exchanges
     implementation project(":libs:exchange-core")
     implementation project(":libs:exchange-binance")
+    implementation project(":libs:exchange-bitmax")
     implementation project(":libs:exchange-bitvavo")
+    implementation project(":libs:exchange-huobi")
+    implementation project(":libs:exchange-kraken")
+    implementation project(":libs:exchange-unicornx")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

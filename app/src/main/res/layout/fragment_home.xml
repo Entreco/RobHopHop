@@ -4,43 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/normal"
     android:fitsSystemWindows="true"
+    android:padding="@dimen/normal"
     tools:context=".main.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/home_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Choose Exchange to monitor"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/home_spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/home_spinner"
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/home_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_title"
-        app:layout_constraintWidth_percent="0.6" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_start"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal"
-        android:text="Start"
+        android:layout_height="0dp"
+        android:padding="60dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_spinner" />
+        app:layout_constraintTop_toTopOf="@id/home_title" />
 
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/large"
+        android:background="@drawable/chat_bubble"
+        android:padding="@dimen/large"
+        android:text="Eh Lal!\nDaily profits between 0.9-3.0%"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintDimensionRatio="150:115"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

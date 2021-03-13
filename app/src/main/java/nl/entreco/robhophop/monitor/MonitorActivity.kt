@@ -11,15 +11,7 @@ import nl.entreco.robhophop.RobKtx.viewModelProvider
 import nl.entreco.robhophop.databinding.ActivityMonitorBinding
 import nl.entreco.robhophop.monitor.di.component
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
+
 class MonitorActivity : AppCompatActivity() {
 
     private val component by component()
@@ -34,7 +26,7 @@ class MonitorActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.state().collect {
-                binding.monitorBtc.text = getString(R.string.current_price, it.valueDescription)
+                binding.monitorBtc.text = getString(R.string.current_price, it.valueDescription, it.currency)
             }
         }
     }

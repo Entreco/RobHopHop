@@ -30,7 +30,6 @@
     </style>
 
     <style name="NormalTheme" parent="Theme.RobHopHop">
-        <item name="android:windowBackground">@drawable/logo_background</item>
     </style>
 
 </resources>

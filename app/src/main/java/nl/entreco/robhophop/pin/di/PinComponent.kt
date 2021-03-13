@@ -7,15 +7,6 @@ import nl.entreco.robhophop.pin.PinActivity
 import nl.entreco.robhophop.pin.PinNavigator
 import nl.entreco.robhophop.pin.PinViewModel
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 @Component(modules = [PinModule::class])
 interface PinComponent {
 

@@ -1,16 +1,9 @@
 package nl.entreco.exchange_core
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 interface Exchange {
     val name: String
+    val market: String
+    val currency: String
 
     companion object {
         fun builder(name: String) = ExchangeBuilder(name)
@@ -20,27 +13,33 @@ interface Exchange {
 internal class ExchangeImpl(
     private val builder: ExchangeBuilder
 ) : Exchange {
+
     override val name: String
         get() = builder.name
+
+    override val market: String
+        get() = builder.market!!
+
+    override val currency: String
+        get() = builder.currency
 }
 
 
 class ExchangeBuilder(internal val name: String) {
 
-    private var key: String? = null
-    private var secret: String? = null
+    internal var market: String? = null
+    internal var currency: String = "USDT"
 
-    fun withKey(apiKey: String) = apply {
-        key = apiKey
+    fun withMarket(market: String) = apply {
+        this.market = market
     }
 
-    fun withSecret(apiSecret: String) = apply {
-        secret = apiSecret
+    fun withCurrency(currency: String) = apply {
+        this.currency = currency
     }
 
     fun build(): Exchange {
-        requireNotNull(key)
-        requireNotNull(secret)
+        requireNotNull(market)
         return ExchangeImpl(this)
     }
 

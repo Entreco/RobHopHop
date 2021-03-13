@@ -6,15 +6,6 @@ import nl.entreco.exchange_core.CurrentExchange
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 @Module
 object MonitorModule {
 

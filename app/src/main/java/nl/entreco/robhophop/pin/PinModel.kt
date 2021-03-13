@@ -1,14 +1,5 @@
 package nl.entreco.robhophop.pin
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class PinModel {
 }
 

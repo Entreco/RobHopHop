@@ -11,15 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import nl.entreco.robhophop.R
 import nl.entreco.robhophop.main.notifications.NotificationsViewModel
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel

@@ -5,15 +5,6 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import nl.entreco.exchange_core.Exchange
 
-/*************************************************************************
- *
- * ONWARD CONFIDENTIAL
- * __________________
- *
- *  [2021] ONWARD
- *  All Rights Reserved.
- *
- */
 @Module
 object HomeModule {
 
