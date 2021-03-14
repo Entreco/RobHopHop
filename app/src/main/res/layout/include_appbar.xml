@@ -6,35 +6,40 @@
     <data>
 
         <variable
-            name="chart"
-            type="nl.entreco.charts.Chart" />
+            name="movingAverage"
+            type="String" />
+
     </data>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         tools:showIn="@layout/fragment_dashboard">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
+            app:contentScrim="@android:color/transparent"
             app:collapsedTitleGravity="center"
-            app:expandedTitleGravity="center">
+            app:expandedTitleGravity="center"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:subtitle="Monitoring exchanges"
+            app:title="@{movingAverage}">
 
             <nl.entreco.charts.ChartView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:render="@{chart}"
+                android:layout_height="200dp"
+                android:background="?attr/colorSurface"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier=".6" />
+                app:layout_collapseParallaxMultiplier=".4" />
+<!--                app:render="@{viewModel.chart}" />-->
 
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:subtitle="Monitoring exchanges"
-            app:title="BTC-USDT" />
 
     </com.google.android.material.appbar.AppBarLayout>
 </layout>

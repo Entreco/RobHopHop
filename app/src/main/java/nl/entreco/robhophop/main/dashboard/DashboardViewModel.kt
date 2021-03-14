@@ -16,6 +16,9 @@ class DashboardViewModel @Inject constructor(
     private val monitors: Map<String, @JvmSuppressWildcards ExchangeMonitoringService>
 ) : ViewModel() {
 
+    private val meanAverage = MutableStateFlow<BigDecimal>(BigDecimal.ZERO)
+    fun average(): StateFlow<BigDecimal> = meanAverage
+
     private val state = MutableStateFlow(DashboardModel())
     fun state(): StateFlow<DashboardModel> = state
 
@@ -25,9 +28,17 @@ class DashboardViewModel @Inject constructor(
             val list = markets.values.toList()
             state.emit(DashboardModel(list))
 
+            val last5 = mutableListOf<BigDecimal>()
             val exchangeMonitors = monitors.values.map { it.monitor() }.toTypedArray()
-            flowOf(*exchangeMonitors).flattenMerge().collect {
-                state.emit(updateExchange(markets, it.first.name, it.second))
+            flowOf(*exchangeMonitors).flattenMerge().collect { pair ->
+                state.emit(updateExchange(markets, pair.first.name, pair.second))
+
+                if(pair.first.market == "BTC-USDT") {
+                    last5.add(0, pair.second)
+                    if (last5.size > 5) last5.removeLast()
+                    val average = last5.map { deci -> deci.toFloat() }.average()
+                    meanAverage.emit(BigDecimal(average))
+                }
             }
         }
     }
@@ -37,13 +48,28 @@ class DashboardViewModel @Inject constructor(
         exchange: String,
         price: BigDecimal
     ): DashboardModel {
-        markets[exchange] = markets[exchange]!!.copy(price = price.setScale(2, RoundingMode.HALF_EVEN))
+        val diff = price.toFloat() - meanAverage.value.toFloat()
+        val type = when {
+            diff < 0 -> Action.Buy
+            diff > 0 -> Action.Sell
+            else -> Action.None
+        }
+        markets[exchange] =
+            markets[exchange]!!.copy(
+                price = price.setScale(2, RoundingMode.HALF_EVEN),
+                action = type
+            )
         return state.value.copy(markets.values.toList())
     }
 
     private fun initialMarkets(exchanges: Map<String, @JvmSuppressWildcards Exchange>) =
         exchanges.map {
-            it.key to DashboardExchange(it.value.name, BigDecimal.ZERO, it.value.currency)
+            it.key to DashboardExchange(
+                it.value.name,
+                BigDecimal.ZERO,
+                it.value.currency,
+                Action.None
+            )
         }.toMap().toMutableMap()
 
     override fun onCleared() {

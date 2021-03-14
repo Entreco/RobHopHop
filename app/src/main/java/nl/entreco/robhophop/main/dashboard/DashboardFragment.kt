@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import nl.entreco.robhophop.R
 import nl.entreco.robhophop.RobKtx.viewModelProvider
 import nl.entreco.robhophop.databinding.FragmentDashboardBinding
 import nl.entreco.robhophop.main.dashboard.di.component
+import java.math.RoundingMode
 
 class DashboardFragment : Fragment() {
 
@@ -27,23 +29,38 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentDashboardBinding>(inflater, R.layout.fragment_dashboard, container, false)
+        val binding = DataBindingUtil.inflate<FragmentDashboardBinding>(
+            inflater,
+            R.layout.fragment_dashboard,
+            container,
+            false
+        )
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        lifecycleScope.launchWhenResumed {
-            setupRecycler(binding.recycler)
-        }
+        setupRecycler(binding.recycler)
+        setupTitle(binding.includeAppbar.collapsingToolbar)
         return binding.root
     }
 
-    private suspend fun setupRecycler(recycler: RecyclerView) {
+    private fun setupTitle(toolbar: CollapsingToolbarLayout) {
+        lifecycleScope.launch {
+            viewModel.average().collect {
+                toolbar.title = getString(R.string.current_average, it.setScale(2, RoundingMode.HALF_EVEN).toEngineeringString())
+            }
+        }
+    }
+
+    private fun setupRecycler(recycler: RecyclerView) {
         recycler.adapter = adapter
         recycler.layoutManager = GridLayoutManager(requireContext(), 1)
         recycler.itemAnimator = null
         recycler.setHasFixedSize(true)
-        viewModel.state().collect {
-            adapter.submitList(it.exchangePrizes)
+
+        lifecycleScope.launch {
+            viewModel.state().collect {
+                adapter.submitList(it.exchangePrizes)
+            }
         }
     }
 }

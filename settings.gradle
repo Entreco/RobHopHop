@@ -1,3 +1,4 @@
+include ':libs:exchange-bitmex'
 include ':libs:charts'
 include ':libs:exchange-unicornx'
 include ':libs:exchange-bitmax'

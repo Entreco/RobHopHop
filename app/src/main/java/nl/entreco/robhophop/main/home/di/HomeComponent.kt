@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import nl.entreco.exchange_binance.BinanceModule
 import nl.entreco.exchange_bitmax.BitmaxModule
+import nl.entreco.exchange_bitmex.BitmexModule
 import nl.entreco.exchange_bitvavo.BitvavoModule
 import nl.entreco.exchange_huobi.HuobiModule
 import nl.entreco.exchange_kraken.KrakenModule
@@ -19,6 +20,7 @@ import nl.entreco.robhophop.main.home.exchanges.HomeExchangeItemAdapter
         HomeModule::class,
         BinanceModule::class,
         BitmaxModule::class,
+        BitmexModule::class,
         BitvavoModule::class,
         HuobiModule::class,
         KrakenModule::class,

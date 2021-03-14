@@ -1,0 +1,10 @@
+apply from: "$rootDir/gradle/library.gradle"
+
+android {
+}
+
+dependencies {
+
+    implementation project(":libs:exchange-core")
+    implementation "com.github.namjug-kim.reactive-crypto:reactive-crypto-bitmex:0.3.1"
+}
