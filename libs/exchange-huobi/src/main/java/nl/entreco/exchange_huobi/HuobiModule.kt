@@ -6,6 +6,7 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
+import javax.inject.Named
 
 @Module
 object HuobiModule {

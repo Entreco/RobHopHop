@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import nl.entreco.robhophop.R
-import nl.entreco.robhophop.main.notifications.NotificationsViewModel
 
 class ProfileFragment : Fragment() {
 

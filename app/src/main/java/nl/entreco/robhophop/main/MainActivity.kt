@@ -1,12 +1,10 @@
 package nl.entreco.robhophop.main
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import nl.entreco.robhophop.R
 import nl.entreco.robhophop.RobKtx.hideSystemUi
 

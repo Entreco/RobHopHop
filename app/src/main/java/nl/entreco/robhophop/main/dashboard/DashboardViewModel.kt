@@ -33,7 +33,7 @@ class DashboardViewModel @Inject constructor(
             flowOf(*exchangeMonitors).flattenMerge().collect { pair ->
                 state.emit(updateExchange(markets, pair.first.name, pair.second))
 
-                if(pair.first.market == "BTC-USDT") {
+                if (pair.first.market == "BTC-USDT") {
                     last5.add(0, pair.second)
                     if (last5.size > 5) last5.removeLast()
                     val average = last5.map { deci -> deci.toFloat() }.average()
@@ -48,10 +48,11 @@ class DashboardViewModel @Inject constructor(
         exchange: String,
         price: BigDecimal
     ): DashboardModel {
-        val diff = price.toFloat() - meanAverage.value.toFloat()
+
+        val diff = 1 - (price.toFloat() / meanAverage.value.toFloat())
         val type = when {
-            diff < 0 -> Action.Buy
-            diff > 0 -> Action.Sell
+            diff < -0.0025 -> Action.Buy
+            diff > 0.0025 -> Action.Sell
             else -> Action.None
         }
         markets[exchange] =
