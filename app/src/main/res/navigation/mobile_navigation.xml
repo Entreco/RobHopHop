@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_trades"
-        android:name="nl.entreco.robhophop.main.trades.TradesFragment"
-        android:label="@string/title_trades"
-        tools:layout="@layout/fragment_trades" />
+        android:name="nl.entreco.robhophop.main.arbitrage.ArbitrageFragment"
+        android:label="@string/title_arbitrage"
+        tools:layout="@layout/fragment_arbitrage" />
 
     <fragment
         android:id="@+id/navigation_profile"

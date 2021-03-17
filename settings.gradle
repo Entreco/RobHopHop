@@ -1,3 +1,6 @@
+include ':libs:exchange-poloniex'
+include ':libs:exchange-okex'
+include ':libs:exchange-upbit'
 include ':libs:exchange-bitmex'
 include ':libs:charts'
 include ':libs:exchange-unicornx'

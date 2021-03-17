@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +17,7 @@ import nl.entreco.robhophop.R
 import nl.entreco.robhophop.RobKtx.viewModelProvider
 import nl.entreco.robhophop.databinding.FragmentDashboardBinding
 import nl.entreco.robhophop.main.dashboard.di.component
+import java.math.BigDecimal
 import java.math.RoundingMode
 
 class DashboardFragment : Fragment() {
@@ -29,16 +31,11 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentDashboardBinding>(
-            inflater,
-            R.layout.fragment_dashboard,
-            container,
-            false
-        )
+        val binding = FragmentDashboardBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        setupRecycler(binding.recycler)
+        setupRecycler(binding.recycler, binding.empty)
         setupTitle(binding.includeAppbar.collapsingToolbar)
         return binding.root
     }
@@ -46,12 +43,15 @@ class DashboardFragment : Fragment() {
     private fun setupTitle(toolbar: CollapsingToolbarLayout) {
         lifecycleScope.launch {
             viewModel.average().collect {
-                toolbar.title = getString(R.string.current_average, it.setScale(2, RoundingMode.HALF_EVEN).toEngineeringString())
+                toolbar.title = getString(
+                    R.string.current_average,
+                    it.setScale(2, RoundingMode.HALF_EVEN).toEngineeringString()
+                )
             }
         }
     }
 
-    private fun setupRecycler(recycler: RecyclerView) {
+    private fun setupRecycler(recycler: RecyclerView, empty: TextView) {
         recycler.adapter = adapter
         recycler.layoutManager = GridLayoutManager(requireContext(), 1)
         recycler.itemAnimator = null
@@ -59,7 +59,13 @@ class DashboardFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.state().collect {
-                adapter.submitList(it.exchangePrizes)
+                val exchanges = it.exchangePrizes
+                    .filter { it.price != BigDecimal.ZERO }
+                    .sortedByDescending { it.price }
+                adapter.submitList(
+                    exchanges
+                )
+                empty.isVisible = exchanges.isEmpty()
             }
         }
     }

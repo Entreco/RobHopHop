@@ -2,4 +2,5 @@
 <resources>
     <string name="current_average">µ: %s USDT</string>
     <string name="expected_profit">%.2f</string>
+    <string name="initializing">Initializing…</string>
 </resources>

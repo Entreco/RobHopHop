@@ -25,7 +25,8 @@
             app:expandedTitleGravity="center"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:subtitle="Monitoring exchanges"
-            app:title="@{movingAverage}">
+            app:title="@{movingAverage}"
+            tools:title="@string/current_average">
 
             <nl.entreco.charts.ChartView
                 android:layout_width="match_parent"

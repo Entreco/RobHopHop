@@ -8,8 +8,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import nl.entreco.exchange_core.Arbitrage
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
+import nl.entreco.exchange_core.Monitor
 import java.math.BigDecimal
 
 class HuobiMonitoringService(
@@ -23,11 +25,11 @@ class HuobiMonitoringService(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override suspend fun monitor(): Flow<Pair<Exchange, BigDecimal>> = callbackFlow {
-        val flux = ws.createTradeWebsocket(listOf(CurrencyPair(Currency.BTC, Currency.USDT)))
+    override suspend fun regular(currencies: List<CurrencyPair>): Flow<Monitor> = callbackFlow {
+        val flux = ws.createTradeWebsocket(currencies)
 
         flux.doOnNext {
-            offer(Pair(exchange, it.price))
+            offer(Monitor(exchange, it.price, it.currencyPair))
         }.doOnError {
             close(it)
         }.subscribe()
@@ -35,6 +37,22 @@ class HuobiMonitoringService(
         awaitClose {
             // trying to stop
         }
+    }
+
+    override suspend fun triangular(triangle: Triple<Currency, Currency, Currency>): Flow<Arbitrage> = callbackFlow {
+
+        var arbitrage = Arbitrage(ExchangeVendor.HUOBI_GLOBAL.name, triangle)
+
+        ws.createTradeWebsocket(arbitrage.pairs).doOnNext {
+            println("WOAH ${exchange.name} $it")
+            arbitrage += it
+            if (arbitrage.isFilled()) {
+                offer(arbitrage.copy())
+                arbitrage = arbitrage.reset()
+            }
+        }.subscribe()
+
+        awaitClose { }
     }
 
     override fun stop() {

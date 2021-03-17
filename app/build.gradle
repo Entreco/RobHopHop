@@ -55,6 +55,9 @@ dependencies {
     implementation project(":libs:exchange-bitvavo")
     implementation project(":libs:exchange-huobi")
     implementation project(":libs:exchange-kraken")
+    implementation project(":libs:exchange-okex")
+    implementation project(":libs:exchange-poloniex")
+    implementation project(":libs:exchange-upbit")
     implementation project(":libs:exchange-unicornx")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

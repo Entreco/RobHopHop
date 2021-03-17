@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="TradesCurrency" >
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <style name="TradesCalculation" >
+        <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <style name="TradesActionButton" parent="Widget.MaterialComponents.Button.TextButton">
+
+    </style>
+</resources>

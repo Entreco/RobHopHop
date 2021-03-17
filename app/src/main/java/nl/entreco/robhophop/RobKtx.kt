@@ -3,6 +3,8 @@ package nl.entreco.robhophop
 import android.app.Activity
 import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -30,8 +32,6 @@ object RobKtx {
     }
 
     fun Activity.hideSystemUi() {
-        window.decorView.systemUiVisibility =
-            SYSTEM_UI_FLAG_LAYOUT_STABLE or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-
+        window.setDecorFitsSystemWindows(false)
     }
 }

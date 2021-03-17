@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="nl.entreco.robhophop.main.arbitrage.trades.triangular.TriangularTrade" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/arbitrage_market"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{item.market}"
+            android:textSize="9sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Binance" />
+
+        <TextView
+            android:id="@+id/arbitrage_currency_2"
+            style="@style/TradesCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.second}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_currency_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arbitrage_market"
+            tools:text="USD" />
+
+        <TextView
+            android:id="@+id/arbitrage_currency_3"
+            style="@style/TradesCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.third}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_currency_4"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_currency_2"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_currency_2"
+            tools:text="GBP" />
+
+        <TextView
+            android:id="@+id/arbitrage_currency_4"
+            style="@style/TradesCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.first}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_currency_5"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_currency_3"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_currency_2"
+            tools:text="EUR" />
+
+        <TextView
+            android:id="@+id/arbitrage_currency_5"
+            style="@style/TradesCurrency"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/tp_action"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_currency_4"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_currency_2"
+            android:text="Profit" />
+
+        <TextView
+            android:id="@+id/arbitrage_percent_2"
+            style="@style/TradesCalculation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.firstToSecond}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_percent_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arbitrage_currency_2"
+            tools:text="0.9" />
+
+        <TextView
+            android:id="@+id/arbitrage_percent_3"
+            style="@style/TradesCalculation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.firstToThird}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_percent_4"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_percent_2"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_percent_2"
+            tools:text="1.5" />
+
+        <TextView
+            android:id="@+id/arbitrage_percent_4"
+            style="@style/TradesCalculation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.secondToThird}"
+            app:layout_constraintEnd_toStartOf="@id/arbitrage_percent_5"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_percent_3"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_percent_2"
+            tools:text="1.7" />
+
+        <TextView
+            android:id="@+id/arbitrage_percent_5"
+            style="@style/TradesCalculation"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            app:profitColor="@{item.action}"
+            android:text="@{item.displayProfit}"
+            app:layout_constraintEnd_toStartOf="@id/tp_action"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_percent_4"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_percent_2"
+            tools:text="+0.2000 %" />
+
+        <TextView
+            android:id="@+id/tp_action"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            app:actionIcon="@{item.action}"
+            tools:drawableTop="@drawable/ic_buy"
+            app:layout_constraintStart_toEndOf="@id/arbitrage_percent_5"
+            app:layout_constraintEnd_toStartOf="@id/to_trade"
+            app:layout_constraintTop_toTopOf="@id/arbitrage_currency_5"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/to_trade"
+            style="@style/TradesActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="TRADE"
+            android:onClick="@{() -> item.onClick()}"
+            app:tradeEnabled="@{item.action}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TRADE" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

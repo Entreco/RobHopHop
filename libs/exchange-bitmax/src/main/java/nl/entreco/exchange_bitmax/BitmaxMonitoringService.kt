@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
+import nl.entreco.exchange_core.Monitor
 import java.math.BigDecimal
 
 class BitmaxMonitoringService(
@@ -24,11 +25,11 @@ class BitmaxMonitoringService(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override suspend fun monitor(): Flow<Pair<Exchange, BigDecimal>> = callbackFlow {
-        val flux = ws.createTradeWebsocket(listOf(CurrencyPair(BTC, USDT)))
+    override suspend fun regular(currencies: List<CurrencyPair>): Flow<Monitor> = callbackFlow {
+        val flux = ws.createTradeWebsocket(currencies)
 
         flux.doOnNext {
-            offer(Pair(exchange, it.price))
+            offer(Monitor(exchange, it.price, it.currencyPair))
         }.doOnError {
             close(it)
         }.subscribe()

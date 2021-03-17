@@ -1,7 +1,8 @@
 package nl.entreco.exchange_bitvavo
 
 import android.util.Log
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.njkim.reactivecrypto.core.common.model.currency.Currency
+import com.njkim.reactivecrypto.core.common.model.currency.CurrencyPair
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
@@ -9,6 +10,7 @@ import nl.entreco.exchange_bitvavo.api.Bitvavo
 import nl.entreco.exchange_bitvavo.api.PriceTicker
 import nl.entreco.exchange_core.Exchange
 import nl.entreco.exchange_core.ExchangeMonitoringService
+import nl.entreco.exchange_core.Monitor
 import java.math.BigDecimal
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -32,10 +34,10 @@ class BitvavoMonitoringService(
         return BigDecimal(currentPrice()?.price ?: "0")
     }
 
-    override suspend fun monitor(): Flow<Pair<Exchange, BigDecimal>> {
+    override suspend fun regular(currencies: List<CurrencyPair>): Flow<Monitor> {
         return bitvavo.subscriptionTicker("BTC-EUR")
             .filter { it.lastPrice.isNotEmpty() }
-            .map { Pair(exchange, BigDecimal(it.lastPrice.toBigInteger())) }
+            .map { Monitor(exchange, BigDecimal(it.lastPrice.toBigInteger()), CurrencyPair(Currency.BTC, Currency("EUR"))) }
     }
 
     override fun stop() {

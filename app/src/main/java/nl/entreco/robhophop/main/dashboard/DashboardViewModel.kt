@@ -16,6 +16,7 @@ class DashboardViewModel @Inject constructor(
     private val monitors: Map<String, @JvmSuppressWildcards ExchangeMonitoringService>
 ) : ViewModel() {
 
+    private val movingAverageWindow = 50
     private val meanAverage = MutableStateFlow<BigDecimal>(BigDecimal.ZERO)
     fun average(): StateFlow<BigDecimal> = meanAverage
 
@@ -28,15 +29,15 @@ class DashboardViewModel @Inject constructor(
             val list = markets.values.toList()
             state.emit(DashboardModel(list))
 
-            val last5 = mutableListOf<BigDecimal>()
-            val exchangeMonitors = monitors.values.map { it.monitor() }.toTypedArray()
-            flowOf(*exchangeMonitors).flattenMerge().collect { pair ->
-                state.emit(updateExchange(markets, pair.first.name, pair.second))
+            val movingAverage = mutableListOf<BigDecimal>()
+            val exchangeMonitors = monitors.values.map { it.regular() }.toTypedArray()
+            flowOf(*exchangeMonitors).flattenMerge().collect { monitor ->
+                state.emit(updateExchange(markets, monitor.exchange.name, monitor.price))
 
-                if (pair.first.market == "BTC-USDT") {
-                    last5.add(0, pair.second)
-                    if (last5.size > 5) last5.removeLast()
-                    val average = last5.map { deci -> deci.toFloat() }.average()
+                if (monitor.exchange.market == "BTC-USDT") {
+                    movingAverage.add(0, monitor.price)
+                    if (movingAverage.size > movingAverageWindow) movingAverage.removeLast()
+                    val average = movingAverage.map { deci -> deci.toFloat() }.average()
                     meanAverage.emit(BigDecimal(average))
                 }
             }
@@ -49,10 +50,10 @@ class DashboardViewModel @Inject constructor(
         price: BigDecimal
     ): DashboardModel {
 
-        val diff = 1 - (price.toFloat() / meanAverage.value.toFloat())
+        val diff = price.toFloat() - meanAverage.value.toFloat()
         val type = when {
-            diff < -0.0025 -> Action.Buy
-            diff > 0.0025 -> Action.Sell
+            diff < 0 -> Action.Buy
+            diff > 0 -> Action.Sell
             else -> Action.None
         }
         markets[exchange] =
@@ -60,7 +61,7 @@ class DashboardViewModel @Inject constructor(
                 price = price.setScale(2, RoundingMode.HALF_EVEN),
                 action = type
             )
-        return state.value.copy(markets.values.toList())
+        return state.value.copy(exchangePrizes = markets.values.toList())
     }
 
     private fun initialMarkets(exchanges: Map<String, @JvmSuppressWildcards Exchange>) =
@@ -69,7 +70,8 @@ class DashboardViewModel @Inject constructor(
                 it.value.name,
                 BigDecimal.ZERO,
                 it.value.currency,
-                Action.None
+                Action.None,
+                it.value.logo
             )
         }.toMap().toMutableMap()
 

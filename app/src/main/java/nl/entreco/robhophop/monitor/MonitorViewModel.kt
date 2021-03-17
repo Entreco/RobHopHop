@@ -1,6 +1,5 @@
 package nl.entreco.robhophop.monitor
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,8 +30,8 @@ class MonitorViewModel @Inject constructor(
             val currentValue = service.start()
             state.value = state.value.init(currentValue)
 
-            service.monitor().onEach {
-                state.value = state.value.update(it.second)
+            service.regular().onEach {
+                state.value = state.value.update(it.price)
             }.collect()
         }
     }
